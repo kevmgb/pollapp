@@ -11,8 +11,6 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        # Fix bug after test because it should return False if its pub_date in the future
-        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
     was_published_recently.admin_order_field = 'pub_date'

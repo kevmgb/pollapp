@@ -3,7 +3,7 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
-
+from django.urls import resolve
 from .models import Question
 
 
@@ -96,11 +96,13 @@ class QuestionViewTest(TestCase):
             ['<Question: Past question 2.>', '<Question: Past question 1.>']
         )
 
+    
+
 
 class QuestionIndexDetailTest(TestCase):
     def test_detail_view_with_a_future_question(self):
         """
-        The detail view of a questions with a pub_date in the future should return a 404 not found
+        The detail view of a question with a pub_date in the future should return a 404 not found
         """
         future_question = create_question(question_text='Future questions.', days=5)
         url = reverse('polls:detail', args=(future_question.id,))
@@ -109,9 +111,40 @@ class QuestionIndexDetailTest(TestCase):
 
     def test_detail_view_with_a_past_question(self):
         """
-        The detail view of a question with a pub_date ine the past should display the question's text
+        The detail view of a question with a pub_date in the past should display the question's text
         """
         past_question = create_question(question_text='Past questions.', days=-5)
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+
+class _str_test(TestCase):
+    def no_question(self):
+        """
+        if no questions exists, an appropriate message should be displayed.
+        """
+        response = self.client.get(reverse('polls:index'))
+        self.assertContains(response, "No polls are available.")
+
+
+    def a_question(self):
+        create_question(question_text="Past question.", days=5)
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(
+            response.context['latest_question_list'],
+            ['<Question: Past question.>']
+        )
+    
+
+class QuestionChoicesTest(TestCase):
+    def question_with_choices(self):
+        create_question(question_text="A question with choices.", days=30)
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(
+            response.context['latest_question_list'],
+            ['<Question: Past question.>']
+        )
+        self.assertIs(future_question.was_published_recently(), False)
+
+    
