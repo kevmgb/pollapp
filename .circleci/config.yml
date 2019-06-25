@@ -22,7 +22,6 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            pip install virtualenv
             virtualenv fenv
             source fenv/bin/activate
             pip install -r requirements.txt
