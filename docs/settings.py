@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig',
     'django_nose',
+    'polls.apps.PollsConfig',
+   
 ]
 
 # Use nose to run all tests
