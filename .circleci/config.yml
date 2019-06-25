@@ -23,7 +23,7 @@ jobs:
           name: install dependencies
           command: |
             python -m venv fenv
-            . venv/bin/activate
+            . fenv/bin/activate
             pip install -r requirements.txt
 
       - save_cache:
