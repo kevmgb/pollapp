@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:2.7.15
+      - image: circleci/python:3.6.4
     working_directory: ~/Django-poll-app-master
 
     steps:
@@ -39,7 +39,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
+            . fenv/bin/activate
             python manage.py test
 
       - store_artifacts:
