@@ -48,8 +48,6 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--with-coverage', # this says we want a coverage report
     '--cover-package=polls', #name of django app you wish to cover
-    '--exclude-path=../*/admin',
-    '--exclude-path=../*/models',
 ]
 
 MIDDLEWARE = [

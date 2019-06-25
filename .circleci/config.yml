@@ -24,4 +24,5 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest -vvvv polls/tests.py
+            python manage.py test polls
+            #pytest -vvvv polls/tests.py
