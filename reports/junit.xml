@@ -1,0 +1,15 @@
+<testsuite errors="1" failures="0" name="Django Project Tests" skips="0" tests="1" time="0.000"><testcase classname="unittest.loader.ModuleImportFailure" name="Django-poll-app-master.polls.tests" time="0.000018"><error message="Failed to import test module: Django-poll-app-master.polls.tests&#10;Traceback (most recent call last):&#10;  File &quot;/usr/lib/python2.7/unittest/loader.py&quot;, line 254, in _find_tests&#10;    module = self._get_module_from_name(name)&#10;  File &quot;/usr/lib/python2.7/unittest/loader.py&quot;, line 232, in _get_module_from_name&#10;    __import__(name)&#10;  File &quot;/home/kevin/Desktop/Django-poll-app-master/polls/tests.py&quot;, line 7, in &lt;module&gt;&#10;    from .models import Question&#10;  File &quot;/home/kevin/Desktop/Django-poll-app-master/polls/models.py&quot;, line 6, in &lt;module&gt;&#10;    class Question(models.Model):&#10;  File &quot;/home/kevin/Desktop/Django-poll-app-master/fenv/local/lib/python2.7/site-packages/django/db/models/base.py&quot;, line 118, in __new__&#10;    &quot;INSTALLED_APPS.&quot; % (module, name)&#10;RuntimeError: Model class Django-poll-app-master.polls.models.Question doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.&#10;" type="exceptions.ImportError">ImportError: Failed to import test module: Django-poll-app-master.polls.tests
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/unittest/loader.py", line 254, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/lib/python2.7/unittest/loader.py", line 232, in _get_module_from_name
+    __import__(name)
+  File "/home/kevin/Desktop/Django-poll-app-master/polls/tests.py", line 7, in &lt;module&gt;
+    from .models import Question
+  File "/home/kevin/Desktop/Django-poll-app-master/polls/models.py", line 6, in &lt;module&gt;
+    class Question(models.Model):
+  File "/home/kevin/Desktop/Django-poll-app-master/fenv/local/lib/python2.7/site-packages/django/db/models/base.py", line 118, in __new__
+    "INSTALLED_APPS." % (module, name)
+RuntimeError: Model class Django-poll-app-master.polls.models.Question doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+</error></testcase></testsuite>
