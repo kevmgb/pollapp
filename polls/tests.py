@@ -2,9 +2,11 @@ import datetime
 
 from django.test import TestCase
 from django.utils import timezone
+from django.http import HttpResponse
 from django.urls import reverse
 from django.urls import resolve
 from .models import Question
+from .views import index,results
 
 
 class QuestionMethodTests(TestCase):
@@ -96,7 +98,14 @@ class QuestionViewTest(TestCase):
             ['<Question: Past question 2.>', '<Question: Past question 1.>']
         )
 
-    
+    def test_index(self):        
+        res = index(None)
+        self.assertIsInstance(res,HttpResponse)    
+
+    # def test_results(self):        
+    #     res = results(None,1)
+    #     self.assertIsInstance(res,HttpResponse)  
+        
 
 
 class QuestionIndexDetailTest(TestCase):

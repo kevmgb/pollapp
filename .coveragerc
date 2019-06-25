@@ -1,0 +1,2 @@
+[run]
+omit = /home/kevin/Desktop/Django-poll-app-master/venv/*
