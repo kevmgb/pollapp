@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
 from django.urls import resolve
-from .models import Question, Choice
+from polls.models import Question, Choice
 from django.test import Client
 
 ###########################################################################
