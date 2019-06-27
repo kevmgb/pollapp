@@ -133,8 +133,17 @@ class VoteTest(TestCase):
         #vote_question_404.choice_set.create(choice_text = 'Testing', votes=0)
         client = Client()
         # Perform a vote on the poll by mocking a POST request.
-        response = client.post('/polls/11000/vote/', {'choice':1,},, follow = True)
+        response = client.post('/polls/11000/vote/', {'choice':1,}, follow = False)
         self.assertEqual(response.status_code, 404)
+
+    def test_choice_not_exists(self):
+        create_question(question_text='Vote for this choice.', days=-2)
+        
+        client = Client()
+        # Perform a vote on the poll by mocking a POST request.
+        response = client.post('/polls/1/vote/', {'choice':11000,})
+        # import pdb; pdb.set_trace()
+        self.assertEqual(response.status_code, 200)
         
 
     def test_voting_302(self):
