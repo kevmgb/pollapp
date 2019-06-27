@@ -40,9 +40,8 @@ INSTALLED_APPS = [
     'django_nose',
     'django.contrib.sites',
     'polls.apps.PollsConfig',
-    
-   
 ]
+
 
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
