@@ -122,8 +122,32 @@ class ChoiceMethodTest(TestCase):
 ###########################################################################
 ###########################################################################
 
+#create a POST request that mocks a vote on the poll and then checks both the status_code 
+# of the response (to check that I have been redirected) and verifies the number of votes has increased. 
 
+class VoteTest(TestCase):
+
+    def test_voting_404(self):
+        vote_question_404 = create_question(question_text='Vote for this.', days=-2)
+
+        #vote_question_404.choice_set.create(choice_text = 'Testing', votes=0)
+        client = Client()
+        # Perform a vote on the poll by mocking a POST request.
+        response = client.post('/polls/11000/vote/', {'choice':1,},, follow = True)
+        self.assertEqual(response.status_code, 404)
         
+
+    def test_voting_302(self):
+        vote_question_302 = create_question(question_text='Vote for this.', days=-2)
+
+        vote_question_302.choice_set.create(choice_text = 'Testing', votes=0)
+
+        client = Client()
+        response = client.post('/polls/1/vote/', {'choice': '1',})
+        #import pdb; pdb.set_trace()
+        self.assertEqual(response.status_code, 302)
+        choice = Choice.objects.get(pk=1)
+        self.assertEqual(choice.votes, 1)
 
 
 

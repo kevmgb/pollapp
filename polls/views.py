@@ -69,17 +69,19 @@ class ResultsView(generic.DetailView):
 def vote(request, question_id):
     # return HttpResponse("You're voting on question %s." % question_id)
     question = get_object_or_404(Question, pk=question_id)
-    
+    import pdb; pdb.set_trace()
 
     try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])       
     except (KeyError, Choice.DoesNotExist):
+        #import pdb; pdb.set_trace()
         # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
         })
     else:
+        #import pdb; pdb.set_trace()
         selected_choice.votes += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
