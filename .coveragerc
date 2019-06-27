@@ -1,2 +1,4 @@
 [run]
 omit = /home/kevin/Desktop/Django-poll-app-master/venv/*
+       /home/kevin/Desktop/Django-poll-app-master/manage.py
+       /home/kevin/Desktop/Django-poll-app-master/docs/wsgi.py

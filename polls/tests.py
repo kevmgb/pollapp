@@ -11,6 +11,7 @@ from django.test import Client
 ###########################################################################
 ###########################################################################
 
+
 class QuestionMethodTests(TestCase):
     def test_was_published_recently_with_future_question(self):
         time = timezone.now() + datetime.timedelta(days=30)
