@@ -26,7 +26,7 @@ SECRET_KEY = 't%=%2-hj&$^sv4z41a+@o&pleeb!+xj^z@rm+%(kocre5vq(%-'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+SITE_URL = 'http://www.mydomain.com'
 
 # Application definition
 
