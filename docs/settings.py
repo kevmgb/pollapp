@@ -25,7 +25,7 @@ SECRET_KEY = 't%=%2-hj&$^sv4z41a+@o&pleeb!+xj^z@rm+%(kocre5vq(%-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
 SITE_URL = 'http://www.mydomain.com'
 
 # Application definition
