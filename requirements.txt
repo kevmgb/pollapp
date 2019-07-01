@@ -56,3 +56,4 @@ tox==3.13.1
 virtualenv==16.6.1
 wcwidth==0.1.7
 zipp==0.5.1
+django-pytest==0.2.0

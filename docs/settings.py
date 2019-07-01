@@ -38,13 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_nose',
+    'django_pytest',
     'django.contrib.sites',
     'polls.apps.PollsConfig',
 ]
 
 
 # Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+TEST_RUNNER = 'django_pytest.test_runner.TestRunner'
 
 NOSE_ARGS = [
     '--with-coverage',   # this says we want a coverage report
