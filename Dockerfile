@@ -16,11 +16,11 @@ COPY . /code
 
 # Install dependencies
 RUN pip install --upgrade setuptools
+RUN sudo apt-get install python3-venv
+RUN python3 -m venv venv
+RUN . venv/bin/activate
 RUN pip install tox
 RUN pip install -r requirements.txt
 
 
 
-#RUN sudo apt-get install python3-venv
-#RUN python3 -m venv venv
-#RUN  . venv/bin/activate
