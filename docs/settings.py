@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 ]
 
 
-# Use nose to run all tests
+# Use pytest to run all tests
 TEST_RUNNER = 'django_pytest.test_runner.TestRunner'
 
 NOSE_ARGS = [
