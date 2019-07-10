@@ -7,6 +7,7 @@ from django.urls import resolve
 from polls.models import Question, Choice
 from django.test import Client
 from model_mommy import mommy
+import pytest
 from model_mommy.recipe import Recipe, foreign_key
 from mock import Mock, patch, PropertyMock
 
@@ -16,27 +17,52 @@ from mock import Mock, patch, PropertyMock
 ###########################################################################
 
 
-class QuestionMethodTests(TestCase):
+# class QuestionMethodTests(TestCase):
 
-    def test_was_published_recently_with_future_question(self):
-        time = timezone.now() + datetime.timedelta(days=30)
-        future_question = Question(pub_date=time)
-        self.assertIs(future_question.was_published_recently(), False)
+#     def test_was_published_recently_with_future_question(self):
+#         time = timezone.now() + datetime.timedelta(days=30)
+#         future_question = Question(pub_date=time)
+#         self.assertIs(future_question.was_published_recently(), False)
 
-    def test_was_published_recently_with_old_question(self):
-        time = timezone.now() - datetime.timedelta(days=30)
-        old_question = Question(pub_date=time)
-        self.assertIs(old_question.was_published_recently(), False)
+#     def test_was_published_recently_with_old_question(self):
+#         time = timezone.now() - datetime.timedelta(days=30)
+#         old_question = Question(pub_date=time)
+#         self.assertIs(old_question.was_published_recently(), False)
 
-    def test_was_published_recently_with_recent_question(self):
-        time = timezone.now() - datetime.timedelta(hours=1)
-        recent_question = Question(pub_date=time)
-        self.assertIs(recent_question.was_published_recently(), True)
+#     def test_was_published_recently_with_recent_question(self):
+#         time = timezone.now() - datetime.timedelta(hours=1)
+#         recent_question = Question(pub_date=time)
+#         self.assertIs(recent_question.was_published_recently(), True)
 
 ###########################################################################
 ###########################################################################
 ###########################################################################
 
+
+futuretime = timezone.now() + datetime.timedelta(days=30)
+future_question = Question(pub_date=futuretime)
+
+pasttime = timezone.now() - datetime.timedelta(days=30)
+old_question = Question(pub_date=pasttime)
+
+recenttime = timezone.now() - datetime.timedelta(hours=1)
+recent_question = Question(pub_date=recenttime)
+
+
+@pytest.mark.parametrize('result, expected', 
+    
+    [
+        (future_question, 'False'),
+        (old_question, 'False'),
+        (recent_question, 'True')
+    ]
+)
+def test_was_published_recently(result, expected):
+    assert str((result.was_published_recently())) == expected
+
+###########################################################################
+###########################################################################
+###########################################################################
 
 def create_question(question_text, days):
     time = timezone.now() + datetime.timedelta(days=days)
@@ -138,7 +164,7 @@ class VoteTest(TestCase):
         vote_question_302.choice_set.create(choice_text='Testing', votes=0)
 
         client = Client()
-        response = client.post('/polls/1/vote/', {'choice': '1',})
+        response = client.post('/polls/1/vote/', {'choice': '1', })
         #import pdb; pdb.set_trace()
         self.assertEqual(response.status_code, 302)
         choice = Choice.objects.get(pk=1)
@@ -147,29 +173,4 @@ class VoteTest(TestCase):
 ###########################################################################
 ###########################################################################
 ###########################################################################
-
-
-# class Test_Questions_Date(TestCase):
-#     def mock_question(self):
-       
-#         return Mock(
-#             question_text='Test',
-#             pub_date=(timezone.now() + datetime.timedelta(days=days)),
-#         )
-
-#     def test_was_published_recently_with_future_question(self):
-#         time = timezone.now() + datetime.timedelta(days=30)
-#         future_question = Question(pub_date=time)
-#         self.assertIs(future_question.was_published_recently(), False)
-
-#     def test_was_published_recently_with_old_question(self):
-#         time = timezone.now() - datetime.timedelta(days=30)
-#         old_question = Question(pub_date=time)
-#         self.assertIs(old_question.was_published_recently(), False)
-
-#     def test_was_published_recently_with_recent_question(self):
-#         time = timezone.now() - datetime.timedelta(hours=1)
-#         recent_question = Question(pub_date=time)
-#         self.assertIs(recent_question.was_published_recently(), True)
-
 
